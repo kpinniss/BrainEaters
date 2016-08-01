@@ -8,11 +8,9 @@ function gameLoop() {
     ctx.drawImage(background, 0, 0, 750, 550);
     player.draw();
     zomb1.draw();
-    zomb2.draw();
-    zomb3.draw();
-    zomb4.draw();
-    moveZomb(zomb1, zomb2, zomb3, zomb4);
+    moveZomb(zomb1);
     playerCollsionBoarder(player, canvas);
+    playerZombieCol(player, zomb1, canvas);
 }
 window.onload = function () {
     canvas = document.getElementById('myCanvas');
@@ -43,7 +41,7 @@ var cPlayer = (function () {
     }
     return cPlayer;
 }());
-var player = new cPlayer(575, 200, 150, 50, 60);
+var player = new cPlayer(575, 200, 150, 50, 50);
 function playerCollsionBoarder(player, canvas) {
     if (player.x + player.width > canvas.width) {
         player.x = canvas.width - player.width * 2;
@@ -84,7 +82,7 @@ var cMob = (function () {
             ctx.save();
             ctx.translate(_this.width, _this.height);
             ctx.translate(_this.x, _this.y);
-            ctx.drawImage(zombie, 50, 50, 50, 60);
+            ctx.drawImage(zombie, 0, 0, 50, 60);
             ctx.restore();
         };
         x = 0;
@@ -93,24 +91,14 @@ var cMob = (function () {
     }
     return cMob;
 }());
-var zomb1 = new cMob(0, 0, 0, 50, 50);
-var zomb4 = new cMob(200, 111, 100, 0, 0);
-var zomb2 = new cMob(310, 200, 10, 0, 0);
-var zomb3 = new cMob(80, 54, 100, 0, 0);
-function moveZomb(zomb1, zomb2, zomb3, zomb4) {
-    zomb2.y += 3;
-    zomb3.y += 5;
-    zomb4.y += 7;
-    if (zomb1.y >= 589) {
-        zomb1.y = -100;
+var zomb1 = new cMob(200, 45, 0, 50, 50);
+function playerZombieCol(player, zomb1, canvas) {
+    var playerPos = (player.x, player.y);
+    var ZombPos = (zomb1.x, zomb1.y);
+    if (playerPos == ZombPos) {
+        playerPos = player.x - player.width;
+        console.log("You died!");
     }
-    if (zomb2.y >= 589) {
-        zomb2.y = -100;
-    }
-    if (zomb3.y >= 589) {
-        zomb3.y = -100;
-    }
-    if (zomb4.y >= 589) {
-        zomb4.y = -100;
-    }
+}
+function moveZomb(zomb1) {
 }

@@ -10,7 +10,8 @@ let wizard = <HTMLImageElement>document.getElementById("wizard");
 let zombie = <HTMLImageElement>document.getElementById("mob");
 
 //main loop to redraw canvas at 60fps
-function gameLoop(): void {
+function gameLoop(): void
+{
   requestAnimationFrame(gameLoop);
   // ctx.fillStyle = "black";
   // ctx.fillRect(0, 0, 800, 500);
@@ -19,17 +20,18 @@ function gameLoop(): void {
 
   player.draw();
   zomb1.draw();
-  zomb2.draw();
-  zomb3.draw();
-  zomb4.draw();
-  moveZomb(zomb1,zomb2,zomb3,zomb4);
+  // zomb2.draw();
+  // zomb3.draw();
+  // zomb4.draw();
+  moveZomb(zomb1);
   playerCollsionBoarder(player,canvas);
-  //playerZombieCol(player, zomb1, canvas);
+  playerZombieCol(player,zomb1, canvas);
 
 }
 
 //draws game on load
-window.onload = () => {
+window.onload = () =>
+{
   canvas = <HTMLCanvasElement>document.getElementById('myCanvas');
   let cwidth = canvas.width;
   let cheight = canvas.height;
@@ -41,7 +43,8 @@ window.onload = () => {
 }
 
 //interface to store char and monster data
-interface iGameChar {
+interface iGameChar
+{
    draw(): void;
    x: number;
    y: number;
@@ -50,14 +53,16 @@ interface iGameChar {
 
 
 //player char
-class cPlayer implements iGameChar {
+class cPlayer implements iGameChar
+{
   constructor(public x:number, public y:number, public speed:number, public width:number, public height: number){
     x = 0;
     y = 0;
     speed = 0;
 
   }
-  public draw = (): void => {
+  public draw = (): void =>
+  {
     ctx.save();
     ctx.translate(this.width, this.height);
     ctx.translate(this.x, this.y);
@@ -66,7 +71,7 @@ class cPlayer implements iGameChar {
   }
 }
 
-let player = new cPlayer(575, 200 , 150, 50, 60);
+let player = new cPlayer(575, 200 , 150, 50, 50);
 
 
  function playerCollsionBoarder(player, canvas)
@@ -91,7 +96,8 @@ let player = new cPlayer(575, 200 , 150, 50, 60);
  }
 
 //get keyboard inputs 4 player movment
-function keyboardInput(event: KeyboardEvent) {
+function keyboardInput(event: KeyboardEvent)
+{
    // PRESS LEFT ARROW OR 'A' KEY
    if (event.keyCode == 37 || event.keyCode == 65) {
       player.x -= 10;
@@ -111,70 +117,81 @@ function keyboardInput(event: KeyboardEvent) {
 }
 
 //zombie char
-class cMob implements iGameChar {
+class cMob implements iGameChar
+{
   constructor(public x:number, public y:number, public speed:number, public width:number, public height: number){
     x = 0;
     y = 0;
 
     speed = 0;
   }
-  public draw = (): void => {
+  public draw = (): void =>
+  {
     ctx.save();
     ctx.translate(this.width, this.height);
     ctx.translate(this.x, this.y);
-    ctx.drawImage(zombie, 50, 50, 50, 60);
+    ctx.drawImage(zombie, 0, 0, 50, 60);
     ctx.restore();
   }
 
 }
 //
 
- let zomb1 = new cMob(0, 0, 0, 50, 50)
- let zomb4 = new cMob(200, 111, 100, 0, 0)
- let zomb2 = new cMob(310,200, 10, 0 ,0)
- let zomb3 = new cMob(80, 54, 100, 0 ,0)
+let zomb1 = new cMob(200, 45, 0, 50, 50)
+//let zomb2 = new cMob(0,0, 0, 50 ,50)
+//let zomb3 = new cMob(80, 54, 100, 0 ,0)
+//let zomb4 = new cMob(200, 111, 100, 0, 0)
 
 
- function moveZomb(zomb1,zomb2,zomb3,zomb4)
+
+ function playerZombieCol(player, zomb1, canvas)
+ {
+   let playerPos = (player.x, player.y);
+   let ZombPos = (zomb1.x, zomb1.y);
+  // if(zomb2.x == zomb1.x)
+  //   {
+  //     console.log('YAY!!!');
+  //   }
+  if(playerPos == ZombPos)
+    {
+        playerPos = player.x - player.width;
+        console.log("You died!")
+
+    }
+  }
+
+
+ function moveZomb(zomb1)
 {
 
    //zomb1.y += 5;
-   zomb2.y += 3;
-   zomb3.y += 5;
-   zomb4.y += 7;
-   if(zomb1.y >= 589)
-   {
-     zomb1.y = -100;
-
-   }
-
-   if(zomb2.y >= 589)
-   {
-     zomb2.y = -100;
-   }
+  // zomb2.y += 3;
+  //  zomb3.y += 5;
+  //  zomb4.y += 7;
+  //  if(zomb1.y >= 589)
+  //  {
+  //    zomb1.y = -100;
    //
-   if(zomb3.y >= 589)
-   {
-     zomb3.y = -100;
-   }
-   //
-   if(zomb4.y >= 589)
-   {
-     zomb4.y = -100;
-   }
+  //  }
+
+  //  if(zomb2.y >= 589)
+  //  {
+  //    zomb2.y = -100;
+  //  }
+  //  //
+  //  if(zomb3.y >= 589)
+  //  {
+  //    zomb3.y = -100;
+  //  }
+  //  //
+  //  if(zomb4.y >= 589)
+  //  {
+  //    zomb4.y = -100;
+  //  }
 
 }
 
-  // function playerZombieCol(player, zomb1, canvas)
-  // {
-  //     if(zomb1.x.Intersects(player.x))
-  //     {
-  //       if(player.x < zomb1.x)
-  //       {
-  //         player.x = zomb1.x - player.width;
-  //       }
-  //     }
-  // }
+
 
 
 
