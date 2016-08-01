@@ -1,27 +1,21 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title></title>
     <link src = "bower_components\bootstrap\dist\css\bootstrap.min.css"></link>
-    <script src="braineaters.js"></script>
+    <link rel="stylesheet" type="text/css" href="theme.css">
   </head>
   <body>
-    <p>canvas</p>
-    <canvas id="myCanvas" width="655" height="500" style="border:1px solid #000000;"></canvas>
-    <hr/>
-    <br>
- <div id="images">
-  <p>player image</p>
-    <img id="playerImg" width="50" height="60" src="Wizard_Male.png" alt=""/>
-  <p>enemy image</p>
-    <img id="enemyImg" width="50" height="60" src="ghoul.png" alt=""/>
-  <p>canvas image</p>
-    <img id="backdrop" width="220" height="277" src="backdrop.jpg" alt=""/>
-  </div>
 
-    <script src = "bower_components\jquery\dist\jquery.min.js"></script>
-    <script src = "bower_components\bootstrap\dist\js\bootstrap.min.js"></script>
-    <script src = "braineaters.js"></script>
+  <canvas id="myCanvas" width="700" height="550"></canvas>
+
+  <img src="backdrop.jpg" width="700" height="550"  id="background" style="display:none"/>
+  <img src="wizard.png" id="wizard" style="display:none"/>
+  <img src="ghoul.png" id="mob" style="display:none"/>
+
+  <script src = "bower_components\jquery\dist\jquery.min.js"></script>
+  <script src = "bower_components\bootstrap\dist\js\bootstrap.min.js"></script>
+  <script src = "braineaters.js"></script>
   </body>
 </html>
